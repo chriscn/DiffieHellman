@@ -5,14 +5,17 @@ class MixingColours(Scene):
         alice = Text("Alice").shift(LEFT * 3).shift(UP * 2)
         bob = Text("Bob").shift(RIGHT * 3).shift(UP * 2)
 
-        alice_square = Square(color=YELLOW).shift(LEFT * 3).set_fill(opacity=0.5)
-        bob_square = Square(color=YELLOW).shift(RIGHT * 3).set_fill(opacity=0.5)
+        center_line = DashedLine([0, 3, 0], [0, -1.5, 0]).set_color(WHITE)
+
+        alice_square = Square(color=YELLOW).set_fill(opacity=0.5)
+        bob_square = Square(color=YELLOW).set_fill(opacity=0.5)
 
         common_starting_colour = Text("Alice and Bob both publicly agree to use the same shared colour, yellow.", size=0.5).shift(DOWN* 2)
 
-        self.play(Create(alice, runtime=4), Create(bob, runtime=4))
+        self.play(Create(alice, runtime=4), Create(bob, runtime=4), FadeIn(center_line))
         self.play(Create(alice_square, runtime=10), Create(bob_square, runtime=10), Create(common_starting_colour, runtime=10))
-        self.wait(4)
+        self.wait(1)
+        self.play(ApplyMethod(alice_square.shift, LEFT * 3), ApplyMethod(bob_square.shift, RIGHT * 3))
         
         secret_colours = Text("Alice and Bob now pick random secret colours that they don't tell one another.", size=0.5).shift(DOWN * 2)
         alice_secret = Square(color=RED).shift(LEFT * 5.5).set_fill(opacity=0.25)
@@ -51,7 +54,7 @@ class MixingColours(Scene):
         self.play(Create(original_colours), ApplyMethod(alice_secret.shift, RIGHT * 2.5), ApplyMethod(bob_secret.shift, LEFT * 2.5))
         self.wait(2)
 
-        shared_secret = Text("By reappling their originally individual secret colours they've arrived at a common secret.", size=0.5).shift(DOWN * 2)
+        shared_secret = Text("By reappling their individual secret colours they've arrived at a common secret.", size=0.5).shift(DOWN * 2)
         alice_shared = Square(color=LIGHT_BROWN).set_fill(opacity=1).shift(LEFT * 3)
         bob_shared = Square(color=LIGHT_BROWN).set_fill(opacity=1).shift(RIGHT * 3)
 
@@ -59,7 +62,7 @@ class MixingColours(Scene):
         self.play(Create(shared_secret), FadeIn(alice_shared), FadeIn(bob_shared))
         self.wait(1)
 
-        secure = Text("This shared colour now can be used to encrypt messages over the insecure network.", size=0.5).shift(DOWN * 3)
+        secure = Text("This shared colour can now be used to encrypt messages over the insecure network.", size=0.5).shift(DOWN * 3)
         self.play(Create(secure))
         self.wait(3)
-        self.play(FadeOut(alice), FadeOut(bob), FadeOut(alice_shared), FadeOut(bob_shared), FadeOut(shared_secret), FadeOut(secure))
+        self.play(FadeOut(alice), FadeOut(bob), FadeOut(alice_shared), FadeOut(bob_shared), FadeOut(shared_secret), FadeOut(secure), FadeOut(center_line))
