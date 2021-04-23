@@ -45,7 +45,7 @@ class MixingColours(Scene):
         self.play(Create(swapped))
         self.wait(2)
 
-        original_colours = Text("They'll now reapply their orignal secret colour.", size=0.5).shift(DOWN * 2)
+        original_colours = Text("They'll now reapply their original secret colour.", size=0.5).shift(DOWN * 2)
         self.play(FadeOut(swapped))
         self.play(Create(original_colours), ApplyMethod(alice_secret.shift, RIGHT * 2.5), ApplyMethod(bob_secret.shift, LEFT * 2.5))
         self.wait(2)
@@ -56,9 +56,10 @@ class MixingColours(Scene):
 
         self.play(FadeOut(original_colours), FadeOut(alice_secret), FadeOut(bob_secret), FadeOut(alice_secret_mixed), FadeOut(bob_secret_mixed))
         self.play(Create(shared_secret), FadeIn(alice_shared), FadeIn(bob_shared))
-        self.wait(5)
+        self.wait(1)
 
-class Maths(Scene):
-    def construct(self):
-        text = Text("Hello, World")
-        self.play(Create(text))
+        secure = Text("This shared colour now can be used to encrypt messages over the insecure network.", size=0.5).shift(DOWN * 3)
+        self.play(Create(secure))
+        self.wait(3)
+        self.play(FadeOut(alice), FadeOut(bob), FadeOut(alice_shared), FadeOut(bob_shared), FadeOut(shared_secret), FadeOut(secure))
+        self.wait(1)
