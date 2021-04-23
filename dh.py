@@ -11,9 +11,8 @@ class MixingColours(Scene):
         common_starting_colour = Text("Alice and Bob both publicly agree to use the same shared colour, yellow.", size=0.5).shift(DOWN* 2)
 
         self.play(Create(alice, runtime=4), Create(bob, runtime=4))
-        self.wait(2)
         self.play(Create(alice_square, runtime=10), Create(bob_square, runtime=10), Create(common_starting_colour, runtime=10))
-        self.wait(3)
+        self.wait(4)
         
         secret_colours = Text("Alice and Bob now pick random secret colours that they don't tell one another.", size=0.5).shift(DOWN * 2)
         alice_secret = Square(color=RED).shift(LEFT * 5.5).set_fill(opacity=0.25)
