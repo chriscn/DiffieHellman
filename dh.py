@@ -19,7 +19,7 @@ class MixingColours(Scene):
         bob_secret = Square(color=TEAL).shift(RIGHT * 5.5).set_fill(opacity=0.25)
 
         self.play(FadeOut(common_starting_colour))
-        self.play(Create(secret_colours), Create(alice_secret), Create(bob_secret))
+        self.play(Create(secret_colours), FadeIn(alice_secret), FadeIn(bob_secret))
         self.wait(3)
         
         mix_colours = Text("They now mix their secret colour with the initial shared colour.", size=0.5).shift(DOWN *2)
