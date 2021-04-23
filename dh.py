@@ -11,6 +11,7 @@ class MixingColours(Scene):
         common_starting_colour = Text("Alice and Bob both publicly agree to use the same shared colour, yellow.", size=0.5).shift(DOWN* 2)
 
         self.play(Create(alice, runtime=4), Create(bob, runtime=4))
+        self.wait(2)
         self.play(Create(alice_square, runtime=10), Create(bob_square, runtime=10), Create(common_starting_colour, runtime=10))
         self.wait(3)
         
@@ -22,7 +23,7 @@ class MixingColours(Scene):
         self.play(Create(secret_colours), Create(alice_secret), Create(bob_secret))
         self.wait(3)
         
-        mix_colours = Text("They now mix their secret colour with the inital shared colour.", size=0.5).shift(DOWN *2)
+        mix_colours = Text("They now mix their secret colour with the initial shared colour.", size=0.5).shift(DOWN *2)
 
         alice_secret_copy = alice_secret.copy()
         bob_secret_copy = bob_secret.copy()
