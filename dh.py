@@ -8,7 +8,7 @@ class MixingColours(Scene):
         alice_square = Square(color=YELLOW).shift(LEFT * 3).set_fill(opacity=0.5)
         bob_square = Square(color=YELLOW).shift(RIGHT * 3).set_fill(opacity=0.5)
 
-        common_starting_colour = Text("Alice and Bob both publicly agree to use the same shared colour yellow.", size=0.5).shift(DOWN* 2)
+        common_starting_colour = Text("Alice and Bob both publicly agree to use the same shared colour, yellow.", size=0.5).shift(DOWN* 2)
 
         self.play(Create(alice, runtime=4), Create(bob, runtime=4))
         self.play(Create(alice_square, runtime=10), Create(bob_square, runtime=10), Create(common_starting_colour, runtime=10))
@@ -29,6 +29,7 @@ class MixingColours(Scene):
 
         self.play(FadeOut(secret_colours))
         self.play(Create(mix_colours), ApplyMethod(alice_secret_copy.shift, RIGHT * 2.5), ApplyMethod(bob_secret_copy.shift, LEFT * 2.5))
+        self.wait(2)
         self.play(FadeOut(alice_secret_copy), FadeOut(alice_square), FadeOut(bob_secret_copy), FadeOut(bob_square))
 
         alice_secret_mixed = Square(color=ORANGE).shift(LEFT * 3).set_fill(opacity=0.5)
@@ -62,4 +63,3 @@ class MixingColours(Scene):
         self.play(Create(secure))
         self.wait(3)
         self.play(FadeOut(alice), FadeOut(bob), FadeOut(alice_shared), FadeOut(bob_shared), FadeOut(shared_secret), FadeOut(secure))
-        self.wait(1)
